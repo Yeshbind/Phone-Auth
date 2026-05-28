@@ -1,0 +1,77 @@
+@import "tailwindcss";
+
+@theme {
+  --font-inter: "Inter", sans-serif;
+  --animate-slide-up: slideUp 0.5s ease-out;
+  --animate-scale-in: scaleIn 0.3s ease-out;
+  --animate-check-pop: checkPop 0.5s ease-out;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes checkPop {
+  0% { transform: scale(0); opacity: 0; }
+  60% { transform: scale(1.15); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@utility card {
+  @apply bg-white border border-[#e0ded8] shadow-sm;
+}
+
+@utility btn-primary {
+  @apply bg-[#6b7a5e] hover:bg-[#5c6a4f] disabled:bg-[#6b7a5e]/50
+         text-white font-medium py-3.5 rounded-lg transition-all duration-200
+         active:scale-[0.98] cursor-pointer;
+}
+
+@utility otp-input {
+  @apply w-14 h-14 bg-[#fafaf7] border border-[#d6d4cc] rounded-lg text-[#2c2c2c] text-center text-xl font-semibold
+         focus:outline-none focus:border-[#6b7a5e]/60 focus:ring-2 focus:ring-[#6b7a5e]/10
+         transition-all duration-200;
+  &.filled {
+    @apply border-[#6b7a5e]/40 bg-[#6b7a5e]/5;
+  }
+}
+
+@utility bg-subtle {
+  background-image: radial-gradient(rgba(107, 122, 94, 0.06) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+@layer base {
+  body {
+    @apply font-inter antialiased;
+  }
+
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0px 1000px #fafaf7 inset;
+    -webkit-text-fill-color: #2c2c2c;
+    transition: background-color 5000s ease-in-out 0s;
+  }
+
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
+
+  ::selection {
+    background: #6b7a5e;
+    color: #fff;
+  }
+}
