@@ -20,7 +20,7 @@ async def health_check():
     """
     return {
         "status": "healthy",
-        "message": "OTP Auth Service is running"
+        "message": "Backend running successfully"
     }
 
 

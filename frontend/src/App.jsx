@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 
-const OTP_LENGTH = 4;
+const OTP_LENGTH = 6;
 
 export default function App() {
   const [step, setStep] = useState(1);
@@ -21,10 +21,11 @@ export default function App() {
     setLoading(true);
     setError('');
     try {
+      const formattedPhone = '+91' + phone;
       const res = await fetch('http://127.0.0.1:8000/api/send-otp', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ phone }),
+        body: JSON.stringify({ phone: formattedPhone }),
       });
       if (res.ok) setStep(2);
       else setError('Failed to send OTP.');
@@ -41,10 +42,11 @@ export default function App() {
     setLoading(true);
     setError('');
     try {
+      const formattedPhone = '+91' + phone;
       const res = await fetch('http://127.0.0.1:8000/api/verify-otp', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ phone, otp: code }),
+        body: JSON.stringify({ phone: formattedPhone, otp: code }),
       });
       if (res.ok) {
         setSuccess(true);
@@ -144,7 +146,7 @@ export default function App() {
 
             <h2 className="text-xl font-semibold text-center">Verify OTP</h2>
             <p className="text-sm text-[#8a8a8a] text-center mt-1 mb-7">
-              Code sent to <span className="text-[#2c2c2c] font-medium">{phone}</span>
+              Code sent to <span className="text-[#2c2c2c] font-medium">{'+91' + phone}</span>
             </p>
 
             <label className="text-xs text-[#8a8a8a] uppercase tracking-wider font-medium mb-3 block text-center">
@@ -199,7 +201,7 @@ export default function App() {
               </div>
               <div className="flex items-center justify-between text-sm">
                 <span className="text-[#8a8a8a]">Phone</span>
-                <span className="text-[#2c2c2c]">{phone}</span>
+                <span className="text-[#2c2c2c]">{'+91' + phone}</span>
               </div>
             </div>
             <button
